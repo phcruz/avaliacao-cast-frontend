@@ -1,0 +1,58 @@
+<p-messages [(value)]="msgs"></p-messages>
+<div style="margin-top: 20px; text-align: center;">
+<p-table [value]="cursos" id="tabela-cursos" #dt [globalFilterFields]="['descricao']" #dt>
+    <ng-template pTemplate="caption">
+        <div class="ui-helper-clearfix" style="text-align: left">
+            <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="EXCEL" (click)="exportarExcel()" style="margin-right: 0.5em;" class="ui-button-success" *ngIf="hasCursos"></button>
+            <button type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="exportarPdf()" class="ui-button-warning" *ngIf="hasCursos"></button>
+            <button routerLink="novo" pButton type="button" label="Novo" style="float:right"></button>
+            
+            <div class="ui-inputgroup" style="float:right; margin-right: 10px;" *ngIf="hasCursos">
+                <span class="ui-inputgroup-addon"><i class="pi pi-search" style="line-height: 1.25;"></i></span>
+                <input type="text" pInputText size="50" placeholder="Buscar curso" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Descrição</th>
+            <th>Data início</th>
+            <th>Data término</th>
+            <th>Qtd. alunos</th>
+            <th>Categoria</th>
+            <th>Ações</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-curso>
+        <tr>
+            <td>{{curso.descricao}}</td>
+            <td>{{curso.dataInicio | date:'dd/MM/yyyy'}}</td>
+            <td>{{curso.dataFim | date:'dd/MM/yyyy'}}</td>
+            <td>{{curso.qtdAlunos}}</td>
+            <td>{{curso.categoria.descricao}}</td>
+            <td>
+                <div class="ui-toolbar-group-center">
+                    <button pButton icon="pi pi-pencil" title="Editar" style="margin-right: 5px;"
+                    (click)="editarCurso(curso)"></button>
+                    <button pButton icon="pi pi-trash" title="Excluir" class="ui-button-danger"
+                    (click)="deletarCurso(curso.id, curso.descricao)"></button>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div *ngIf="hasCursos">
+            {{cursos?.length}} curso(s) cadastrado(s).
+        </div>
+        <div *ngIf="cursos.length === 0">
+            Nenhum curso cadastrado.
+        </div>
+    </ng-template>
+</p-table>
+</div>
+<p-confirmDialog #cd header="Confirmação" icon="pi pi-exclamation-triangle" >
+    <p-footer>
+        <button type="button" pButton icon="pi pi-times" label="Não" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="pi pi-check" label="Sim" (click)="cd.accept()"></button>
+    </p-footer>
+</p-confirmDialog>

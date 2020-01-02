@@ -1,0 +1,54 @@
+
+<p-messages [(value)]="msgs"></p-messages>
+<div class="ui-g ui-fluid" style="margin-top: 20px;">
+    <div class="ui-g-12 ui-md-4 ui-md-offset-4">
+        <span class="ui-float-label">
+            <input id="descricao" type="text" size="30" pInputText [(ngModel)]="curso.descricao">
+            <label for="descricao">Descrição</label>
+        </span>
+    </div>
+    <div class="ui-g-12 ui-md-4"></div>
+
+    <div class="ui-g-12 ui-md-4 ui-md-offset-4">
+        <span class="ui-float-label">
+            <p-calendar id="dataInicio" [showIcon]="true" [locale]="pt" [(ngModel)]="curso.dataInicio" dateFormat="dd/mm/yy"></p-calendar>
+            <label for="dataInicio">Data de início</label>
+        </span>
+    </div>
+    <div class="ui-g-12 ui-md-4"></div>
+
+    <div class="ui-g-12 ui-md-4 ui-md-offset-4">
+        <span class="ui-float-label">
+            <p-calendar id="dataFim" [showIcon]="true" [locale]="pt" [(ngModel)]="curso.dataFim" dateFormat="dd/mm/yy"></p-calendar>
+            <label for="dataFim">Data de término</label>
+        </span>
+    </div>
+    <div class="ui-g-12 ui-md-4"></div>
+
+    <div class="ui-g-12 ui-md-4 ui-md-offset-4">
+        <span class="ui-float-label">
+            <input id="qtdAlunos" pInputText type="text" pKeyFilter="int" [(ngModel)]="curso.qtdAlunos" >
+            <label for="qtdAlunos">Qtd. alunos</label>
+        </span>
+    </div>
+    <div class="ui-g-12 ui-md-4"></div>
+
+    <div class="ui-g-12 ui-md-4 ui-md-offset-4">
+        <p-dropdown id="categoria" [options]="listaCategoria"
+            [(ngModel)]="categoriaSelecionada" 
+            optionLabel="descricao"></p-dropdown>
+    </div>
+    <div class="ui-g-12 ui-md-4"></div>
+
+    <div class="ui-g-12 ui-md-2 ui-md-offset-4">
+        <span class="ui-float-label">
+            <button pButton type="button" label="Salvar" (click)="validaCamposForm()"></button>
+        </span>
+    </div>
+    <div class="ui-g-12 ui-md-2">
+        <span class="ui-float-label">
+            <button routerLink="/curso" pButton type="button" label="Voltar" ></button>
+        </span>
+    </div>
+    <div class="ui-g-12 ui-md-4"></div>
+</div>
