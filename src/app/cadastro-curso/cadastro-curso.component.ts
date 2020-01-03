@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Categoria } from '../categoria';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Curso } from '../curso';
 import { CategoriaService } from '../categoria.service';
 import { CursoService } from '../curso.service';
 import { Message } from 'primeng/api/message';
-import { isNull, isUndefined, log } from 'util';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -57,13 +56,16 @@ export class CadastroCursoComponent implements OnInit {
   public validaCamposForm() {
     this.msgs = [];
     if (this.curso.descricao == null || this.curso.descricao.trim() === '') {
-      this.msgs.push({severity: 'error', summary: 'Descrição: ', detail: 'É obrigatório o preenchimento do campo descrição.'});
+      this.msgs.push({severity: 'error', summary: 'Descrição: ', detail: 'É obrigatório preencher o campo descrição.'});
     }
     if (this.curso.dataInicio == null) {
       this.msgs.push({severity: 'error', summary: 'Data início: ', detail: 'É obrigatório preencher a data de início do curso.'});
     }
     if (this.curso.dataFim == null) {
       this.msgs.push({severity: 'error', summary: 'Data término: ', detail: 'É obrigatório preencher a data de término do curso.'});
+    }
+    if (this.curso.qtdAlunos > 9999) {
+      this.msgs.push({severity: 'error', summary: 'Qtd. alunos: ', detail: 'O limite de alunos no curso é de 9999.'});
     }
     if (this.categoriaSelecionada.id == null) {
       this.msgs.push({severity: 'error', summary: 'Categoria: ', detail: 'É obrigatório preencher a categoria do curso.'});

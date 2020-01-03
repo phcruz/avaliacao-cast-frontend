@@ -1,6 +1,6 @@
 <p-messages [(value)]="msgs"></p-messages>
 <div style="margin-top: 20px; text-align: center;">
-<p-table [value]="cursos" id="tabela-cursos" #dt [globalFilterFields]="['descricao']" #dt>
+<p-table [value]="cursos" id="tabela-cursos" #dt [globalFilterFields]="['descricao']" #dt [responsive]="true">
     <ng-template pTemplate="caption">
         <div class="ui-helper-clearfix" style="text-align: left">
             <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="EXCEL" (click)="exportarExcel()" style="margin-right: 0.5em;" class="ui-button-success" *ngIf="hasCursos"></button>

@@ -44,7 +44,7 @@ export class CursoComponent implements OnInit {
 
   public deletarCurso(id: string, descricao: string) {
     this.confirmationService.confirm({
-      message: 'Deseja realmente excluir o curso' + descricao + '?',
+      message: 'Deseja realmente excluir o curso ' + descricao + '?',
       accept: () => {
         this.cursoService.deletarCurso(id).subscribe(
           response => {
@@ -124,5 +124,11 @@ public salvarComoArquivoExcel(buffer: any, fileName: string): void {
         });
         FileSaver.saveAs(data, fileName + '_' + new Date().getTime() + EXCEL_EXTENSION);
     });
-}
+  }
+
+  public corrigeData(dataString: string): Date {
+    const dateParts = dataString.split('/');
+
+    return new Date(+dateParts[2], (+dateParts[1] - 1), +dateParts[0], 1, 1, 1);
+  }
 }
